@@ -18,7 +18,15 @@ var createTaskEl = function(taskDataObj) {
         listItemEl.appendChild(taskInfoEl);
     var taskActionsEl = createTaskActions(taskIdCounter);
         listItemEl.appendChild(taskActionsEl);
-        tasksToDoEl.appendChild(listItemEl);
+        if (taskDataObj.status === "to do") {
+            tasksToDoEl.appendChild(listItemEl);
+        }
+        else if (taskDataObj.status === "in progress")  {
+            tasksInProgressEl.appendChild(listItemEl);
+        }
+        else if (taskDataObj.status === "completed") {
+            tasksCompleteEl.appendChild(listItemEl);
+        };
         taskDataObj.id = taskIdCounter;
         tasks.push(taskDataObj);
         taskIdCounter++;
@@ -200,25 +208,10 @@ var loadTasks = function() {
             return false;
         }
         savedTasks = JSON.parse(savedTasks);
+        console.log("Saved Tasks from loading")
+        console.log(savedTasks);
         for (var i = 0; i < savedTasks.length; i++) {
             createTaskEl(savedTasks[i]);
-    // var statusType = savedTasks[i].closest("status");
-    //         console.log(savedTasks);
-    //     }
-    //     if (statusType === "to do") {
-    //         tasksToDoEl.appendChild(savedTasks);
-    //     }
-    //     else if (statusType === "in progress") {
-    //         tasksInProgressEl.appendChild(savedTasks);
-    //     }
-    //     else if (statusType === "completed") {
-    //         tasksCompleteEl.appendChild(savedTasks);
-    //     }
-    //     for (var i = 0; i < savedTasks.length; i++) {
-    //         if (statusType === parseInt("status")) {
-    //             statusType = statusValue;
-    //         }
-        
         }
     };
 
