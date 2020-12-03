@@ -1,5 +1,4 @@
 # Taskinator
-<<<<<<< HEAD
 ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
 
   [MIT License Link](https://opensource.org/licenses/MIT)
@@ -30,8 +29,3 @@ https://durganp1.github.io/Taskinator/
 ## Questions
 
   If you have questions about the project or an open issue, you can contact me at durganp1@gmail.com.  You can see more of my repo's at https://github.com/durganp1/.
-=======
-
-
-https://durganp1.github.io/Taskinator/
->>>>>>> 65fc0d0953324b4fc9ec3f6c59bbb248dd24d3d3
