@@ -41,8 +41,6 @@ var taskFormHandler = function(event) {
 };
 
 var createTaskEl = function(taskDataObj) {
-    console.log(taskDataObj);
-    console.log(taskDataObj.status);
     // create a list item
     var listItemEl = document.createElement('li');
     listItemEl.className = 'task-item';
@@ -67,8 +65,9 @@ var createTaskEl = function(taskDataObj) {
     // add taskId to taskDataObj
     taskDataObj.id = taskIdCounter;
 
-    // add taskDataObj to tasks array
+    // add taskDataObj to tasks array and save to local storage
     tasks.push(taskDataObj);
+    saveTasks();
 
     // add list item to list
     tasksToDoEl.appendChild(listItemEl);
@@ -142,7 +141,6 @@ var taskButtonHandler = function(event) {
 };
 
 var editTask = function(taskId) {
-    console.log('editing task #' + taskId);
 
     // get task list item element
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
@@ -174,6 +172,9 @@ var completeEditTask = function(taskName, taskType, taskId) {
         }
     };
 
+    // save new tasks array to local storage
+    saveTasks();
+
     alert("Task Updated!");
 
     // reset the form
@@ -198,6 +199,9 @@ var deleteTask = function(taskId) {
 
     // reassign tasks aray to be the same at updatedTaskArr
     tasks = updatedTaskArr;
+
+    // save updated array to local storage
+    saveTasks();
 };
 
 var taskStatusChangeHandler = function(event) {
@@ -226,6 +230,9 @@ var taskStatusChangeHandler = function(event) {
             tasks[i].status = statusValue;
         }
     };
+
+    // save updated tasks array to local storage
+    saveTasks();
 };
 
 var dragTaskHandler = function(event) {
@@ -269,12 +276,20 @@ var dropTaskHandler = function(event) {
         }
     };
 
+    // save updated array to local storage
+    saveTasks();
+};
+
 var dragLeaveHandler = function(event) {
     var taskListEl = event.target.closest('.task-list');
     if (taskListEl) {
         taskListEl.removeAttribute('style');
     }
-}
+};
+
+var saveTasks = function() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+};
 
 formEl.addEventListener('submit', taskFormHandler);
 pageContentEl.addEventListener('click', taskButtonHandler);
